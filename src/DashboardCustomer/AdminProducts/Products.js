@@ -165,7 +165,7 @@ const AdminProducts = () => {
 
           <TablePagination
             component="div"
-            count={allProducts?.model?.totalItems || 0}
+            count={allProducts?.model?.totalPages || 0}
             page={Number(currentPage)}
             rowsPerPage={Number(rowsPerPage)}
             onPageChange={handlePageChange}
