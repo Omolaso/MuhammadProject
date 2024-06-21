@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { DemoPaper } from "../../components/RecommendationSlider";
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -11,6 +12,7 @@ function shuffleArray(array) {
 }
 
 const CategoryComponent = (props) => {
+  const loginID = sessionStorage.getItem("loginID");
   const shuffledArray = shuffleArray(props?.categoryData);
 
   return (
@@ -26,7 +28,7 @@ const CategoryComponent = (props) => {
             to={props.categoryPage}
             className=" text-indigo-500 inline-flex items-center text-xl"
           >
-            Learn More
+            View More
             <svg
               fill="none"
               stroke="currentColor"
@@ -42,28 +44,33 @@ const CategoryComponent = (props) => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 p-4 w-full">
-        {shuffledArray?.slice(0, 3)?.map((product, index) => (
-          <div key={index} className="mt-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center w-full">
+        {shuffledArray?.slice(0, 4)?.map((product, index) => (
+          <DemoPaper
+            key={index}
+            className="flex flex-col items-start justify-center gap-3"
+          >
             <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1 font-bold">
               {product?.site?.name}
             </h3>
-            <h2 className="text-gray-900 title-font text-lg font-medium">
+            <h2 className="text-gray-900 title-font text-base font-medium text-left text-wrap">
               {product?.name}
             </h2>
             <p className="mt-1">
               {product?.price.charAt[0] === "$" ? " " : "$"}
               {product?.price}
             </p>
-            <a
-              href={product?.link}
-              target="_blank"
-              rel="noreferrer"
-              className="text-blue-600 hover:underline"
-            >
-              View Here
-            </a>
-          </div>
+            {loginID && (
+              <a
+                href={product?.link}
+                target="_blank"
+                rel="noreferrer"
+                className="text-blue-600 hover:underline"
+              >
+                View Here
+              </a>
+            )}
+          </DemoPaper>
         ))}
       </div>
     </div>

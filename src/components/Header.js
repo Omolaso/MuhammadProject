@@ -1,9 +1,10 @@
 import React from "react";
 import logo from "../assets/img/logo.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faSearch } from "@fortawesome/free-solid-svg-icons";
 // import { faSearch, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 // import {
 //   faFacebookF,
 //   faInstagram,
@@ -12,6 +13,14 @@ import { Link } from "react-router-dom";
 // } from "@fortawesome/free-brands-svg-icons";
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    sessionStorage.clear();
+    navigate("/");
+    toast.success("You've been logged out");
+  };
+
   return (
     <div className="flex flex-col md:flex-row items-center justify-between flex-wrap p-5 text-gray-600 body-font relative z-10">
       <Link
@@ -77,7 +86,14 @@ const Header = () => {
             </div>
           </button>
         </div>
-      ) : null}
+      ) : (
+        <button
+          onClick={() => handleLogout()}
+          className="font-500 text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg"
+        >
+          Logout
+        </button>
+      )}
     </div>
   );
 };

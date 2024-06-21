@@ -1,4 +1,6 @@
 import React from "react";
+import { Paper } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useFetcher } from "../utils/axiosFetcher";
@@ -13,12 +15,12 @@ const responsive = {
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 1,
+    items: 3,
     slidesToSlide: 1,
   },
   tablet: {
     breakpoint: { max: 1024, min: 768 },
-    items: 1,
+    items: 2,
     slidesToSlide: 1,
   },
   mobile: {
@@ -28,7 +30,16 @@ const responsive = {
   },
 };
 
+export const DemoPaper = styled(Paper)(({ theme }) => ({
+  minHeight: "100%",
+  padding: theme.spacing(2),
+  ...theme.typography.body2,
+  textAlign: "center",
+}));
+
 const RecommendationSlider = () => {
+  const loginID = sessionStorage.getItem("loginID");
+
   const {
     data: recommendations,
     isLoading: recommendationsLoading,
@@ -74,30 +85,32 @@ const RecommendationSlider = () => {
             className="w-full py-4 min-h-full"
           >
             {allRecommendations?.map((item, index) => (
-              <div
+              <DemoPaper
                 key={index}
-                className="bg-gray-300 p-4 rounded-lg leading-relaxed"
+                className="flex flex-col items-start justify-center gap-3 leading-relaxed mx-4"
               >
                 <h2 className="tracking-widest text-indigo-500 text-xs font-medium title-font">
                   {item?.site?.name}
                 </h2>
-                <h3 className="text-lg text-gray-900 font-medium title-font mb-4">
+                <h3 className="text-lg text-gray-900 font-medium title-font">
                   {item?.category?.name}
                 </h3>
-                <p className="text-base">{item?.name}</p>
-                <p className="mt-1">
+                <p className="text-base text-left">{item?.name}</p>
+                <p>
                   {item?.price.charAt[0] === "$" ? " " : "$"}
                   {item?.price}
                 </p>
-                <a
-                  href={item?.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-blue-600 hover:underline"
-                >
-                  View Here
-                </a>
-              </div>
+                {loginID && (
+                  <a
+                    href={item?.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-blue-600 hover:underline"
+                  >
+                    View Here
+                  </a>
+                )}
+              </DemoPaper>
             ))}
           </Carousel>
         )}

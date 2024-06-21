@@ -33,7 +33,7 @@ const Login = () => {
       ? navigate("/Admin")
       : res.data.model.roleId === 2
       ? navigate("/Vendor")
-      : navigate("/CustomerDashboard");
+      : navigate("/");
 
     sessionStorage.setItem("loginID", res.data.model.loginId);
   };
@@ -50,6 +50,7 @@ const Login = () => {
       .post("/Account/login", payload)
       .then((res) => {
         redirectUser(res);
+        toast.success("Login Successful");
         // console.log(res);
       })
       .catch((err) => {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
@@ -26,6 +26,7 @@ import logo from "../../assets/img/logo.png";
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formStatus, setFormStatus] = useState(false);
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -53,7 +54,8 @@ const Register = () => {
     axiosFetcher
       .post("/Account/sign-up", payload)
       .then((res) => {
-        toast.success("Registration Successful");
+        toast.success("Registration Successful. Please login in.");
+        navigate("/Login");
         // console.log(res);
       })
       .catch((err) => {
@@ -172,9 +174,10 @@ const Register = () => {
                     <select
                       {...register("role")}
                       id="role"
+                      defaultValue={3}
                       className="bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded outline-blue-500"
                     >
-                      <option value={1}>Admin</option>
+                      {/* <option value={1}>Admin</option> */}
                       <option value={2}>Vendor</option>
                       <option value={3}>Customer</option>
                     </select>
