@@ -5,7 +5,7 @@ import {
   BsGrid1X2Fill,
   BsFillArchiveFill,
   //   BsFillGrid3X3GapFill,
-  //   BsPeopleFill,
+  BsPeopleFill,
   //   BsListCheck,
   BsMenuButtonWideFill,
   //   BsFillGearFill,
@@ -67,6 +67,11 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
         <li className="sidebar-list-item">
           <Link to="/Admin/Reports">
             <BsMenuButtonWideFill className="icon" /> Reports
+          </Link>
+        </li>
+        <li className="sidebar-list-item">
+          <Link to="/Admin/Users">
+            <BsPeopleFill className="icon" /> Users
           </Link>
         </li>
 

@@ -14,6 +14,7 @@ import AdminProducts from "./DashboardCustomer/AdminProducts/Products";
 import AdminReports from "./DashboardCustomer/AdminReports/AdminReports";
 import NotFound from "./Pages/NotFound/NotFound";
 import AdminHome from "./DashboardCustomer/AdminDashboard/AdminHome";
+import AdminUsers from "./DashboardCustomer/AdminUsers/AdminUsers";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MobilePhones from "./Pages/Category/SubCategory/MobilePhones";
 import GPU from "./Pages/Category/SubCategory/GPU";
@@ -105,6 +106,7 @@ const ProjectRoutes = () => {
         <Route index element={<AdminHome />} />
         <Route path="/Admin/Products" element={<AdminProducts />} />
         <Route path="/Admin/Reports" element={<AdminReports />} />
+        <Route path="/Admin/Users" element={<AdminUsers />} />
       </Route>
     </Routes>
   );

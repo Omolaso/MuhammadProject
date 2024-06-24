@@ -120,7 +120,7 @@ const AdminProducts = () => {
       ) : (
         <div className="flex-1 flex flex-col justify-between w-full">
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table sx={{ minWidth: 650 }} aria-label="data table">
               <TableHead>
                 <TableRow>
                   <TableCell>Category</TableCell>
