@@ -37,16 +37,6 @@ const SubCategoryComponent = (props) => {
     }&page=${currentPage}&pageSize=${10}`
   );
 
-  const handlePageChange = (event, value) => {
-    setSearchParams(
-      (prevParam) => {
-        prevParam.set("page", `${value}`);
-        return prevParam;
-      },
-      { replace: true }
-    );
-  };
-
   const SearchProduct = async () => {
     if (!searchedProductName) {
       toast.error("Search input cannot be empty");
@@ -55,7 +45,7 @@ const SubCategoryComponent = (props) => {
 
     try {
       const res = await axiosFetcher.get(
-        `/Product/get-all?name=${searchedProductName}&page=${currentPage}&pageSize=${10}`
+        `/Product/get-all?name=${searchedProductName}&userKey=${loginID}&page=${currentPage}&pageSize=${10}`
       );
       const searchedResponse = await res.data;
       setAllProducts(searchedResponse);
@@ -73,6 +63,34 @@ const SubCategoryComponent = (props) => {
       toast.error("An error occurred");
     }
   };
+
+  const handlePageChange = (event, value) => {
+    setSearchParams(
+      (prevParam) => {
+        prevParam.set("page", `${value}`);
+        return prevParam;
+      },
+      { replace: true }
+    );
+  };
+
+  const handleViewParticularProduct = async (url, id) => {
+    const payload = {
+      productId: id,
+      userId: loginID,
+    };
+
+    try {
+      await axiosFetcher.post("/UserVisitedProduct/insert", payload);
+      // console.log(res);
+      window.open(url, "_blank");
+    } catch (error) {
+      // console.log(error);
+      toast.error("An error occurred");
+    }
+  };
+
+  // console.log(allProducts);
 
   useEffect(() => {
     setAllProducts(product);
@@ -143,14 +161,15 @@ const SubCategoryComponent = (props) => {
                     {product?.price}
                   </p>
                   {loginID && (
-                    <a
-                      href={product?.link}
-                      target="_blank"
-                      rel="noreferrer"
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleViewParticularProduct(product?.link, product?.id)
+                      }
                       className="text-blue-600 hover:underline"
                     >
                       View Here
-                    </a>
+                    </button>
                   )}
                 </DemoPaper>
               ))}

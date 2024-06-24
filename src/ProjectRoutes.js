@@ -29,11 +29,46 @@ const ProjectRoutes = () => {
       <Route path="/Blog" element={<Blog />} />
       <Route path="/Contact" element={<Contact />} />
       <Route path="/Category" element={<Category />} />
-      <Route path="/Category/mobile-phones" element={<MobilePhones />} />
-      <Route path="/Category/gpu" element={<GPU />} />
-      <Route path="/Category/graphic-card" element={<GraphicCard />} />
-      <Route path="/Category/laptops" element={<Laptops />} />
-      <Route path="/Category/smart-watch" element={<SmartWatch />} />
+      <Route
+        path="/Category/mobile-phones"
+        element={
+          <ProtectedRoute>
+            <MobilePhones />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/Category/gpu"
+        element={
+          <ProtectedRoute>
+            <GPU />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/Category/graphic-card"
+        element={
+          <ProtectedRoute>
+            <GraphicCard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/Category/laptops"
+        element={
+          <ProtectedRoute>
+            <Laptops />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/Category/smart-watch"
+        element={
+          <ProtectedRoute>
+            <SmartWatch />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/Login" element={<Login />} />
       <Route path="/Register" element={<Register />} />
       <Route path="*" element={<NotFound />} />

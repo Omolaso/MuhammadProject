@@ -10,19 +10,6 @@ import { toast } from "react-toastify";
 import Header from "../../components/Header";
 import logo from "../../assets/img/logo.png";
 
-// SITE ID
-// 1	Alibaba
-// 2	Amazon
-// 3	eBay
-// 4	Flip Kart
-
-// CATEGORY ID
-// 1	Graphic card
-// 2	Laptop
-// 3	Mobile
-// 4	Smart watch
-// 5	GPU
-
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formStatus, setFormStatus] = useState(false);

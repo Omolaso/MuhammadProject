@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { axiosFetcher } from "../../utils/axiosFetcher";
+import { toast } from "react-toastify";
 import { DemoPaper } from "../../components/RecommendationSlider";
 
 function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
+  for (let i = array?.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
 
     [array[i], array[j]] = [array[j], array[i]];
@@ -14,6 +16,22 @@ function shuffleArray(array) {
 const CategoryComponent = (props) => {
   const loginID = sessionStorage.getItem("loginID");
   const shuffledArray = shuffleArray(props?.categoryData);
+
+  const handleViewParticularProduct = async (url, id) => {
+    const payload = {
+      productId: id,
+      userId: loginID,
+    };
+
+    try {
+      await axiosFetcher.post("/UserVisitedProduct/insert", payload);
+      // console.log(res);
+      window.open(url, "_blank");
+    } catch (error) {
+      // console.log(error);
+      toast.error("An error occurred");
+    }
+  };
 
   return (
     <div className="flex flex-col gap-4 w-full">
@@ -61,14 +79,15 @@ const CategoryComponent = (props) => {
               {product?.price}
             </p>
             {loginID && (
-              <a
-                href={product?.link}
-                target="_blank"
-                rel="noreferrer"
+              <button
+                type="button"
+                onClick={() =>
+                  handleViewParticularProduct(product?.link, product?.id)
+                }
                 className="text-blue-600 hover:underline"
               >
                 View Here
-              </a>
+              </button>
             )}
           </DemoPaper>
         ))}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   BarChart,
   Bar,
@@ -11,105 +11,210 @@ import {
   LineChart,
   Line,
 } from "recharts";
+import { toast } from "react-toastify";
+import { useFetcher } from "../utils/axiosFetcher";
+import { NoVisitedProducts } from "../DashboardCustomer/AdminDashboard/AdminHome";
+import Loader from "../utils/Loader";
 
-// const data = [
-//   {
-//     name: "Page A",
-//     uv: 4000,
-//     pv: 2400,
-//     amt: 2400,
-//   },
-//   {
-//     name: "Page B",
-//     uv: 3000,
-//     pv: 1398,
-//     amt: 2210,
-//   },
-//   {
-//     name: "Page C",
-//     uv: 2000,
-//     pv: 9800,
-//     amt: 2290,
-//   },
-//   {
-//     name: "Page D",
-//     uv: 2780,
-//     pv: 3908,
-//     amt: 2000,
-//   },
-//   {
-//     name: "Page E",
-//     uv: 1890,
-//     pv: 4800,
-//     amt: 2181,
-//   },
-//   {
-//     name: "Page F",
-//     uv: 2390,
-//     pv: 3800,
-//     amt: 2500,
-//   },
-//   {
-//     name: "Page G",
-//     uv: 3490,
-//     pv: 4300,
-//     amt: 2100,
-//   },
-// ];
+const Charts = () => {
+  const loginID = sessionStorage.getItem("loginID");
 
-const Charts = (props) => {
-  console.log(props?.userVisitedProduct);
+  // USER VISITED PRODUCTS
+  const {
+    data: userVisitedProduct,
+    isLoading: userVisitedProductLoading,
+    error: userVisitedProductError,
+  } = useFetcher(`/UserVisitedProduct/get-all?guid=${loginID}`);
+
+  // USER VISITED PRODUCTS CHART-DATA
+  const userVisitedChartData = new Map();
+
+  userVisitedProduct?.model?.map((item) => {
+    const keyword = item?.category?.name;
+
+    if (userVisitedChartData.has(keyword)) {
+      return userVisitedChartData.set(
+        keyword,
+        userVisitedChartData.get(keyword) + 1
+      );
+    }
+
+    return userVisitedChartData.set(keyword, 1);
+  });
+
+  const userVisitedProductChartData = Array.from(
+    userVisitedChartData,
+    ([keyword, count]) => ({
+      visitedProduct: keyword,
+      count: count,
+    })
+  );
+
+  // USER VISITED WEBSITE CHART-DATA
+  const userSiteChartData = new Map();
+
+  userVisitedProduct?.model?.map((item) => {
+    const keyword = item?.site?.name;
+
+    if (userSiteChartData.has(keyword)) {
+      return userSiteChartData.set(keyword, userSiteChartData.get(keyword) + 1);
+    }
+
+    return userSiteChartData.set(keyword, 1);
+  });
+
+  const userVisitedSiteChartData = Array.from(
+    userSiteChartData,
+    ([keyword, count]) => ({
+      visitedProduct: keyword,
+      count: count,
+    })
+  );
+
+  // USER SEARCHED PRODUCTS
+  const {
+    data: userProductSearch,
+    isLoading: userProductSearchLoading,
+    error: userProductSearchError,
+  } = useFetcher("ProductSearch/get-all");
+
+  // USER SEARCHED PRODUCTS CHART-DATA
+  const userSearchedChartData = new Map();
+
+  userProductSearch?.model?.map((item) => {
+    const keyword = item?.searchedKeyword;
+
+    if (userSearchedChartData.has(keyword)) {
+      return userSearchedChartData.set(
+        keyword,
+        userSearchedChartData.get(keyword) + 1
+      );
+    }
+
+    return userSearchedChartData.set(keyword, 1);
+  });
+
+  const userSearchedProductChartData = Array.from(
+    userSearchedChartData,
+    ([keyword, count]) => ({
+      searchedKeyword: keyword,
+      count: count,
+    })
+  );
+
+  if (userProductSearchError) {
+    return toast.error("An error occured");
+  }
+
+  if (userVisitedProductError) {
+    return toast.error("An error occured");
+  }
 
   return (
     <div className="charts">
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          width={500}
-          height={300}
-          data={props?.categories?.categoryData?.model}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="id" fill="#8884d8" />
-          {/* <Bar dataKey="uv" fill="#82ca9d" /> */}
-        </BarChart>
-      </ResponsiveContainer>
+      <Fragment>
+        {userProductSearchLoading ? (
+          <Loader />
+        ) : !userProductSearchLoading &&
+          userProductSearch?.model?.length < 1 ? (
+          <NoVisitedProducts />
+        ) : (
+          <div className="flex flex-col items-center gap-4 w-full">
+            <h2 className="text-center">USER SEARCHED PRODUCTS</h2>
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                width={500}
+                height={300}
+                data={userSearchedProductChartData}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="searchedKeyword" />
+                <YAxis />
+                <Tooltip shared={false} trigger="click" />
+                <Legend />
+                <Bar dataKey="count" fill="#8884d8" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        )}
+      </Fragment>
 
-      <ResponsiveContainer width="100%" height="100%">
-        <LineChart
-          width={500}
-          height={300}
-          data={props?.categories?.categoryData?.model}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line
-            type="monotone"
-            dataKey="id"
-            stroke="#8884d8"
-            activeDot={{ r: 8 }}
-          />
-          <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-        </LineChart>
-      </ResponsiveContainer>
+      <Fragment>
+        {userVisitedProductLoading ? (
+          <Loader />
+        ) : !userVisitedProductLoading &&
+          userVisitedProduct?.model?.length < 1 ? (
+          <NoVisitedProducts />
+        ) : (
+          <div className="flex flex-col items-center gap-4 w-full">
+            <h2 className="text-center">USER VISITED PRODUCTS</h2>
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart
+                width={500}
+                height={300}
+                data={userVisitedProductChartData}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="visitedProduct" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="count"
+                  stroke="#8884d8"
+                  activeDot={{ r: 8 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        )}
+      </Fragment>
+
+      <Fragment>
+        {userVisitedProductLoading ? (
+          <Loader />
+        ) : !userVisitedProductLoading &&
+          userVisitedProduct?.model?.length < 1 ? (
+          <NoVisitedProducts />
+        ) : (
+          <div className="flex flex-col items-center gap-4 w-full">
+            <h2 className="text-center">USER VISITED SITES</h2>
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                width={500}
+                height={300}
+                data={userVisitedSiteChartData}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="visitedProduct" />
+                <YAxis />
+                <Tooltip shared={false} trigger="click" />
+                <Legend />
+                <Bar dataKey="count" fill="#8884d8" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        )}
+      </Fragment>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { Paper } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { useFetcher } from "../utils/axiosFetcher";
+import { useFetcher, axiosFetcher } from "../utils/axiosFetcher";
 import { toast } from "react-toastify";
 import Loader from "../utils/Loader";
 
@@ -47,6 +47,22 @@ const RecommendationSlider = () => {
   } = useFetcher("/Product/get-recommendations");
 
   const allRecommendations = recommendations?.model;
+
+  const handleViewParticularProduct = async (url, id) => {
+    const payload = {
+      productId: id,
+      userId: loginID,
+    };
+
+    try {
+      await axiosFetcher.post("/UserVisitedProduct/insert", payload);
+      // console.log(res);
+      window.open(url, "_blank");
+    } catch (error) {
+      // console.log(error);
+      toast.error("An error occurred");
+    }
+  };
 
   if (recommendationsError) {
     return toast.error("An error occured while loading products");
@@ -101,14 +117,15 @@ const RecommendationSlider = () => {
                   {item?.price}
                 </p>
                 {loginID && (
-                  <a
-                    href={item?.link}
-                    target="_blank"
-                    rel="noreferrer"
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleViewParticularProduct(item?.link, item?.id)
+                    }
                     className="text-blue-600 hover:underline"
                   >
                     View Here
-                  </a>
+                  </button>
                 )}
               </DemoPaper>
             ))}

@@ -1,25 +1,19 @@
 import React from "react";
-import { toast } from "react-toastify";
+import { CardMedia } from "@mui/material";
 import { useFetcher } from "../../utils/axiosFetcher";
 import Loader from "../../utils/Loader";
 import CategoryComponent from "./CategoryComponent";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CategoryBanner from "../../assets/img/categoryBannerImg.png";
-import { CardMedia } from "@mui/material";
 
 const Category = () => {
-  const {
-    data: products,
-    isLoading: productsLoading,
-    error: productsError,
-  } = useFetcher("/Product/get-all");
+  const loginID = sessionStorage.getItem("loginID");
+
+  const { data: products, isLoading: productsLoading } =
+    useFetcher("/Product/get-all");
 
   const allProducts = products?.model?.data;
-
-  if (productsError) {
-    return toast.error("An error occured while loading products");
-  }
 
   const graphicCard = allProducts?.filter(
     (products) => products?.category?.name?.toLowerCase() === "graphic card"
@@ -42,7 +36,7 @@ const Category = () => {
       <Header />
 
       <section className="flex flex-col gap-4 md:gap-8 text-gray-600 bg-sky-100 body-font">
-        <div className="container mx-auto flex lg:flex-row flex-col items-center p-4 bg-gradient-to-r from-slate-500 to-gray-900">
+        <div className="lg:container mx-auto flex lg:flex-row flex-col items-center p-4 bg-gradient-to-r from-slate-500 to-gray-900">
           <div className="flex-[0.7] flex flex-col md:items-start md:text-left items-center text-center">
             <h1 className="title-font sm:text-4xl md:text-6xl text-3xl mb-4 font-bold text-white uppercase ">
               Before they sold out
@@ -62,75 +56,83 @@ const Category = () => {
           </div>
         </div>
 
-        <div className="text-gray-600 body-font py-4">
-          <div className="container px-5 mx-auto">
-            {productsLoading ? (
-              <Loader />
-            ) : (
-              <CategoryComponent
-                categoryHeader={"Mobile Phone"}
-                categoryPage={"/Category/mobile-phones"}
-                categoryData={mobilePhones}
-              />
-            )}
-          </div>
-        </div>
+        {loginID ? (
+          <>
+            <div className="text-gray-600 body-font py-4">
+              <div className="container px-5 mx-auto">
+                {productsLoading ? (
+                  <Loader />
+                ) : (
+                  <CategoryComponent
+                    categoryHeader={"Mobile Phone"}
+                    categoryPage={"/Category/mobile-phones"}
+                    categoryData={mobilePhones}
+                  />
+                )}
+              </div>
+            </div>
 
-        <div className="text-gray-600 body-font py-4">
-          <div className="container px-5 mx-auto">
-            {productsLoading ? (
-              <Loader />
-            ) : (
-              <CategoryComponent
-                categoryHeader={"Graphic Card"}
-                categoryPage={"/Category/graphic-card"}
-                categoryData={graphicCard}
-              />
-            )}
-          </div>
-        </div>
+            <div className="text-gray-600 body-font py-4">
+              <div className="container px-5 mx-auto">
+                {productsLoading ? (
+                  <Loader />
+                ) : (
+                  <CategoryComponent
+                    categoryHeader={"Graphic Card"}
+                    categoryPage={"/Category/graphic-card"}
+                    categoryData={graphicCard}
+                  />
+                )}
+              </div>
+            </div>
 
-        <div className="text-gray-600 body-font py-4 ">
-          <div className="container px-5 mx-auto">
-            {productsLoading ? (
-              <Loader />
-            ) : (
-              <CategoryComponent
-                categoryHeader={"Laptops"}
-                categoryPage={"/Category/laptops"}
-                categoryData={laptop}
-              />
-            )}
-          </div>
-        </div>
+            <div className="text-gray-600 body-font py-4 ">
+              <div className="container px-5 mx-auto">
+                {productsLoading ? (
+                  <Loader />
+                ) : (
+                  <CategoryComponent
+                    categoryHeader={"Laptops"}
+                    categoryPage={"/Category/laptops"}
+                    categoryData={laptop}
+                  />
+                )}
+              </div>
+            </div>
 
-        <div className="text-gray-600 body-font py-4">
-          <div className="container px-5 mx-auto">
-            {productsLoading ? (
-              <Loader />
-            ) : (
-              <CategoryComponent
-                categoryHeader={"Smart Watch"}
-                categoryPage={"/Category/smart-watch"}
-                categoryData={smartWatch}
-              />
-            )}
-          </div>
-        </div>
+            <div className="text-gray-600 body-font py-4">
+              <div className="container px-5 mx-auto">
+                {productsLoading ? (
+                  <Loader />
+                ) : (
+                  <CategoryComponent
+                    categoryHeader={"Smart Watch"}
+                    categoryPage={"/Category/smart-watch"}
+                    categoryData={smartWatch}
+                  />
+                )}
+              </div>
+            </div>
 
-        <div className="text-gray-600 body-font py-4">
-          <div className="container px-5 mx-auto">
-            {productsLoading ? (
-              <Loader />
-            ) : (
-              <CategoryComponent
-                categoryHeader={"GPU"}
-                categoryPage={"/Category/gpu"}
-                categoryData={gpu}
-              />
-            )}
+            <div className="text-gray-600 body-font py-4">
+              <div className="container px-5 mx-auto">
+                {productsLoading ? (
+                  <Loader />
+                ) : (
+                  <CategoryComponent
+                    categoryHeader={"GPU"}
+                    categoryPage={"/Category/gpu"}
+                    categoryData={gpu}
+                  />
+                )}
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className="flex items-center justify-center w-full py-4">
+            <h3>Please login to view products</h3>
           </div>
-        </div>
+        )}
       </section>
 
       <Footer />

@@ -3,7 +3,7 @@ import {
   BsFillArchiveFill,
   BsFillGrid3X3GapFill,
   BsPeopleFill,
-  BsFillBellFill,
+  BsPersonUp,
 } from "react-icons/bs";
 import { useFetcher } from "../../utils/axiosFetcher";
 import { toast } from "react-toastify";
@@ -19,8 +19,6 @@ export const NoVisitedProducts = () => {
 };
 
 function AdminHome() {
-  const loginID = sessionStorage.getItem("loginID");
-
   // PRODUCTS
   const {
     data: products,
@@ -35,12 +33,19 @@ function AdminHome() {
     error: categoriesError,
   } = useFetcher("/Category/get-all");
 
-  // USER VISITED PRODUCTS
+  // USERS
   const {
-    data: userVisitedProduct,
-    isLoading: userVisitedProductLoading,
-    error: userVisitedProductError,
-  } = useFetcher(`/UserVisitedProduct/get-all?guid=${loginID}`);
+    data: users,
+    isLoading: usersLoading,
+    error: usersError,
+  } = useFetcher("/Account/get-users");
+
+  //VISITORS
+  const {
+    data: visitors,
+    isLoading: visitorsLoading,
+    error: visitorsError,
+  } = useFetcher("/UserVisited/get-all");
 
   if (productsError) {
     return toast.error("An error occured while loading products");
@@ -48,8 +53,11 @@ function AdminHome() {
   if (categoriesError) {
     return toast.error("An error occured while loading categories");
   }
-  if (userVisitedProductError) {
-    return toast.error("An error occured");
+  if (usersError) {
+    return toast.error("An error occured while loading users");
+  }
+  if (visitorsError) {
+    return toast.error("An error occured while loading users");
   }
 
   return (
@@ -88,29 +96,23 @@ function AdminHome() {
             <h3>CUSTOMERS</h3>
             <BsPeopleFill className="card_icon" />
           </div>
-          <h1>33</h1>
+          {usersLoading ? <Loader /> : <h1>{users?.model?.length || ""}</h1>}
         </div>
 
         <div className="card">
           <div className="card-inner">
-            <h3>ALERTS</h3>
-            <BsFillBellFill className="card_icon" />
+            <h3>VISITORS</h3>
+            <BsPersonUp className="card_icon" />
           </div>
-          <h1>42</h1>
+          {visitorsLoading ? (
+            <Loader />
+          ) : (
+            <h1>{visitors?.model?.length || ""}</h1>
+          )}
         </div>
       </div>
 
-      {userVisitedProductLoading ? (
-        <Loader />
-      ) : !userVisitedProductLoading &&
-        userVisitedProduct?.model?.length < 1 ? (
-        <NoVisitedProducts />
-      ) : (
-        <Charts
-          categories={categories}
-          userVisitedProduct={userVisitedProduct}
-        />
-      )}
+      <Charts />
     </section>
   );
 }

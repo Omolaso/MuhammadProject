@@ -41,7 +41,7 @@ body {
 /* Header  */
 .header {
   grid-area: header;
-  height: 60px;
+  /* height: 60px; */
   display: flex;
   align-items: center;
   justify-content: space-between;

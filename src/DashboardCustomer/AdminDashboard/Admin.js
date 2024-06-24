@@ -12,7 +12,7 @@ function Admin() {
   };
 
   return (
-    <div className="grid-container">
+    <div className="grid-container bg-[#1d2634]">
       <Header OpenSidebar={OpenSidebar} />
       <Sidebar
         openSidebarToggle={openSidebarToggle}
