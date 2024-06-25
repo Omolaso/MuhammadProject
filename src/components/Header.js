@@ -1,16 +1,7 @@
 import React from "react";
 import logo from "../assets/img/logo.png";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faSearch } from "@fortawesome/free-solid-svg-icons";
-// import { faSearch, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-// import {
-//   faFacebookF,
-//   faInstagram,
-//   faTwitter,
-//   faYoutube,
-// } from "@fortawesome/free-brands-svg-icons";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -47,14 +38,6 @@ const Header = () => {
         <Link to="/Contact" className="hover:text-yellow-400">
           Contact Us
         </Link>
-        {/* <form action="" className="formSearch">
-          <input
-            className="searchInp"
-            type="search"
-            placeholder="Search here ..."
-          />
-          <FontAwesomeIcon className="fa" icon={faSearch} />
-        </form> */}
       </nav>
 
       {!sessionStorage.getItem("loginID") ? (
