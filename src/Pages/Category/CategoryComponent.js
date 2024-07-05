@@ -2,16 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { axiosFetcher } from "../../utils/axiosFetcher";
 import { toast } from "react-toastify";
-import { DemoPaper } from "../../components/RecommendationSlider";
+import { ProductCard } from "../../components/RecommendationSlider";
 
-function shuffleArray(array) {
+export const shuffleArray = (array) => {
   for (let i = array?.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
 
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
-}
+};
 
 const CategoryComponent = (props) => {
   const loginID = sessionStorage.getItem("loginID");
@@ -64,7 +64,7 @@ const CategoryComponent = (props) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center w-full">
         {shuffledArray?.slice(0, 4)?.map((product, index) => (
-          <DemoPaper
+          <ProductCard
             key={index}
             className="flex flex-col items-start justify-center gap-3"
           >
@@ -75,8 +75,9 @@ const CategoryComponent = (props) => {
               {product?.name}
             </h2>
             <p className="mt-1">
-              {product?.price.charAt[0] === "$" ? " " : "$"}
-              {product?.price}
+              {product?.price.charAt(0) === "$"
+                ? product?.price
+                : `$${product?.price}`}
             </p>
             {loginID && (
               <button
@@ -89,7 +90,7 @@ const CategoryComponent = (props) => {
                 View Here
               </button>
             )}
-          </DemoPaper>
+          </ProductCard>
         ))}
       </div>
     </div>

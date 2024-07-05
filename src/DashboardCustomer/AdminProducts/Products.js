@@ -13,6 +13,7 @@ import {
 import { toast } from "react-toastify";
 import Loader from "../../utils/Loader";
 import { axiosFetcher, useFetcher } from "../../utils/axiosFetcher";
+import { shuffleArray } from "../../Pages/Category/CategoryComponent";
 
 const AdminProducts = () => {
   const [allProducts, setAllProducts] = useState([]);
@@ -83,7 +84,9 @@ const AdminProducts = () => {
   };
 
   useEffect(() => {
-    setAllProducts(products);
+    const shuffledArray = shuffleArray(products?.model?.data);
+
+    setAllProducts(shuffledArray);
   }, [products]);
 
   if (productsError) {
@@ -131,7 +134,7 @@ const AdminProducts = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {allProducts?.model?.data?.map((product, index) => (
+                {allProducts?.map((product, index) => (
                   <TableRow
                     key={index}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -165,7 +168,7 @@ const AdminProducts = () => {
 
           <TablePagination
             component="div"
-            count={allProducts?.model?.totalPages || 0}
+            count={products?.model?.totalPages || 0}
             page={Number(currentPage)}
             rowsPerPage={Number(rowsPerPage)}
             onPageChange={handlePageChange}

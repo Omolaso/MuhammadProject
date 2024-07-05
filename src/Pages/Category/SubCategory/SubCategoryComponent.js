@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { Pagination } from "@mui/material";
 import { toast } from "react-toastify";
 import { useFetcher, axiosFetcher } from "../../../utils/axiosFetcher";
-import { DemoPaper } from "../../../components/RecommendationSlider";
+import { ProductCard } from "../../../components/RecommendationSlider";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import Loader from "../../../utils/Loader";
@@ -48,6 +48,7 @@ const SubCategoryComponent = (props) => {
         `/Product/get-all?name=${searchedProductName}&userKey=${loginID}&page=${currentPage}&pageSize=${10}`
       );
       const searchedResponse = await res.data;
+
       setAllProducts(searchedResponse);
 
       setSearchParams(
@@ -146,7 +147,7 @@ const SubCategoryComponent = (props) => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center w-full">
               {allProducts?.model?.data?.map((product, index) => (
-                <DemoPaper
+                <ProductCard
                   key={index}
                   className="flex flex-col items-start justify-center gap-3"
                 >
@@ -157,8 +158,9 @@ const SubCategoryComponent = (props) => {
                     {product?.name}
                   </h2>
                   <p className="mt-1">
-                    {product?.price.charAt[0] === "$" ? " " : "$"}
-                    {product?.price}
+                    {product?.price.charAt(0) === "$"
+                      ? product?.price
+                      : `$${product?.price}`}
                   </p>
                   {loginID && (
                     <button
@@ -171,7 +173,7 @@ const SubCategoryComponent = (props) => {
                       View Here
                     </button>
                   )}
-                </DemoPaper>
+                </ProductCard>
               ))}
             </div>
           </div>

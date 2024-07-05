@@ -30,11 +30,16 @@ const responsive = {
   },
 };
 
-export const DemoPaper = styled(Paper)(({ theme }) => ({
+export const ProductCard = styled(Paper)(({ theme }) => ({
   minHeight: "100%",
   padding: theme.spacing(2),
   ...theme.typography.body2,
   textAlign: "center",
+  transition: "transform 0.3s ease-in-out",
+
+  "&:hover": {
+    transform: "translateY(-10px)",
+  },
 }));
 
 const RecommendationSlider = () => {
@@ -101,7 +106,7 @@ const RecommendationSlider = () => {
             className="w-full py-4 min-h-full"
           >
             {allRecommendations?.map((item, index) => (
-              <DemoPaper
+              <ProductCard
                 key={index}
                 className="flex flex-col items-start justify-center gap-3 leading-relaxed mx-4"
               >
@@ -113,8 +118,9 @@ const RecommendationSlider = () => {
                 </h3>
                 <p className="text-base text-left">{item?.name}</p>
                 <p>
-                  {item?.price.charAt[0] === "$" ? " " : "$"}
-                  {item?.price}
+                  {item?.price.charAt(0) === "$"
+                    ? item?.price
+                    : `$${item?.price}`}
                 </p>
                 {loginID && (
                   <button
@@ -127,7 +133,7 @@ const RecommendationSlider = () => {
                     View Here
                   </button>
                 )}
-              </DemoPaper>
+              </ProductCard>
             ))}
           </Carousel>
         )}
