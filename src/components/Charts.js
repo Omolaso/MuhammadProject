@@ -76,7 +76,7 @@ const Charts = () => {
     data: userProductSearch,
     isLoading: userProductSearchLoading,
     error: userProductSearchError,
-  } = useFetcher("ProductSearch/get-all");
+  } = useFetcher("/ProductSearch/get-all");
 
   // USER SEARCHED PRODUCTS CHART-DATA
   const userSearchedChartData = new Map();
