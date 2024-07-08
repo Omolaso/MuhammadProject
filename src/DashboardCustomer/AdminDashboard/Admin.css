@@ -188,10 +188,10 @@ body {
 
 .charts {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 20px;
-  margin-top: 60px;
-  height: 300px;
+  margin-top: 20px;
+  height: 500px;
 }
 
 /* End Main  */

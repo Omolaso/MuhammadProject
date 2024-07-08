@@ -51,25 +51,25 @@ const Charts = () => {
   );
 
   // USER VISITED WEBSITE CHART-DATA
-  // const userSiteChartData = new Map();
+  const userSiteChartData = new Map();
 
-  // userVisitedProduct?.model?.map((item) => {
-  //   const keyword = item?.site?.name;
+  userVisitedProduct?.model?.map((item) => {
+    const keyword = item?.site?.name;
 
-  //   if (userSiteChartData.has(keyword)) {
-  //     return userSiteChartData.set(keyword, userSiteChartData.get(keyword) + 1);
-  //   }
+    if (userSiteChartData.has(keyword)) {
+      return userSiteChartData.set(keyword, userSiteChartData.get(keyword) + 1);
+    }
 
-  //   return userSiteChartData.set(keyword, 1);
-  // });
+    return userSiteChartData.set(keyword, 1);
+  });
 
-  // const userVisitedSiteChartData = Array.from(
-  //   userSiteChartData,
-  //   ([keyword, count]) => ({
-  //     visitedProduct: keyword,
-  //     count: count,
-  //   })
-  // );
+  const userVisitedSiteChartData = Array.from(
+    userSiteChartData,
+    ([keyword, count]) => ({
+      visitedProduct: keyword,
+      count: count,
+    })
+  );
 
   // USER SEARCHED PRODUCTS
   const {
@@ -111,7 +111,7 @@ const Charts = () => {
   }
 
   return (
-    <div className="charts flex flex-col gap-3 w-full">
+    <div className="charts">
       <Fragment>
         {userProductSearchLoading ? (
           <Loader />
@@ -183,7 +183,7 @@ const Charts = () => {
         )}
       </Fragment>
 
-      {/* <Fragment>
+      <Fragment>
         {userVisitedProductLoading ? (
           <Loader />
         ) : !userVisitedProductLoading &&
@@ -214,7 +214,7 @@ const Charts = () => {
             </ResponsiveContainer>
           </div>
         )}
-      </Fragment> */}
+      </Fragment>
     </div>
   );
 };
