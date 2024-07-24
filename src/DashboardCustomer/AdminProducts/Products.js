@@ -94,7 +94,7 @@ const AdminProducts = () => {
   }
 
   return (
-    <section className="main-container flex flex-col gap-4 w-full">
+    <section className="main-container flex flex-col gap-4 w-full min-h-screen">
       <div className="flex flex-row items-center justify-between gap-3 flex-wrap">
         <h3>PRODUCTS</h3>
         <div className="flex flex-row items-stretch gap-3 h-8 bg-transparent duration-500 ease-linear">

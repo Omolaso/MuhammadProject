@@ -30,8 +30,8 @@ body {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 260px 1fr 1fr 1fr;
-  grid-template-rows: 0.2fr 3fr;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr;
+  grid-template-rows: 3fr;
   grid-template-areas:
     "sidebar header header header"
     "sidebar main main main";
@@ -45,7 +45,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 30px 0 30px;
+  padding: 30px;
   box-shadow: 0 6px 7px -3px rgba(0, 0, 0, 0.35);
   background-color: #1d2634;
 }
@@ -134,8 +134,8 @@ body {
 /* Main  */
 .main-container {
   grid-area: main;
-  overflow-y: auto;
-  padding: 20px 20px;
+  /* overflow-y: auto; */
+  padding: 20px;
   color: rgba(255, 255, 255, 0.95);
   background-color: #1d2634;
 }
@@ -187,11 +187,7 @@ body {
 }
 
 .charts {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  margin-top: 20px;
-  height: 500px;
+  height: 300px;
 }
 
 /* End Main  */
@@ -225,13 +221,12 @@ body {
   .main-cards {
     grid-template-columns: 1fr;
     gap: 10px;
-    margin-bottom: 0;
   }
 
-  .charts {
+  /* .charts {
     grid-template-columns: 1fr;
     margin-top: 30px;
-  }
+  } */
 }
 
 /* Extra Small <= 576px */
