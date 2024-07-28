@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
   return (
@@ -23,26 +24,22 @@ const Contact = () => {
           <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Contact Me Quick
+              Contact
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-              lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-              fugiat aliqua.
-            </p>
+            <p className="mt-6 text-lg leading-8 text-gray-600">Reach Us</p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
-                href="#"
+              <Link
+                to="#"
                 className="rounded-md bg-sky-400 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-yellow-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Get started
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="#"
                 className="text-sm font-semibold leading-6 text-gray-900 hover:border-2 border-2 border-transparent hover:border-yellow-400 p-2 transition-all rounded-md"
               >
                 Learn more <span aria-hidden="true">→</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -63,18 +60,19 @@ const Contact = () => {
                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">
                   ADDRESS
                 </h2>
-                <p className="mt-1">
-                  Photo booth tattooed prism, portland taiyaki hoodie neutra
-                  typewriter
-                </p>
+                <p className="mt-1">32-G, Shan Arcade, Lahore</p>
               </div>
               <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">
                   EMAIL
                 </h2>
-                <a className="text-indigo-500 leading-relaxed">
-                  smartpick@email.com
+                <a
+                  href="mailto:smartpick@gmail.com"
+                  className="text-indigo-500 leading-relaxed"
+                >
+                  smartpick@gmail.com
                 </a>
+
                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">
                   PHONE
                 </h2>
@@ -86,9 +84,7 @@ const Contact = () => {
             <h2 className="text-gray-900 text-3xl mb-1 font-bold title-font">
               Contact Details Enter Here!
             </h2>
-            <p className="leading-relaxed mb-5 text-gray-600">
-              Post-ironic portland shabby chic echo park, banjo fashion axe
-            </p>
+            <p className="leading-relaxed mb-5 text-gray-600">Enter details</p>
             <div className="relative mb-4">
               <label htmlFor="name" className="leading-7 text-sm text-gray-600">
                 Name
@@ -129,11 +125,10 @@ const Contact = () => {
               />
             </div>
             <button className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-              Button
+              Send
             </button>
             <p className="text-xs text-gray-500 mt-3">
-              Chicharrones blog helvetica normcore iceland tousled brook viral
-              artisan.
+              We will reply in a day or two
             </p>
           </div>
         </div>

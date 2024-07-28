@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import aboutSectionImg from "../assets/img/aboutSectionImg.png";
 import aboutSectionImg2 from "../assets/img/aboutSectionImg2.png";
 
@@ -31,13 +32,13 @@ const AboutDetails = () => {
               </div>
               <div className="flex-grow">
                 <h2 className="text-gray-900 text-lg title-font font-medium mb-3">
-                  Shooting Stars
+                  MacBooks
                 </h2>
-                <p className="leading-relaxed text-base">
-                  Blue bottle crucifix vinyl post-ironic four dollar toast vegan
-                  taxidermy. Gastropub indxgo juice poutine.
-                </p>
-                <a className="mt-3 text-indigo-500 inline-flex items-center">
+                <p className="leading-relaxed text-base">Highend MacBooks</p>
+                <Link
+                  to={"#"}
+                  className="mt-3 text-indigo-500 inline-flex items-center"
+                >
                   Learn More
                   <svg
                     fill="none"
@@ -50,7 +51,7 @@ const AboutDetails = () => {
                   >
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="flex flex-col mb-10 lg:items-start items-center">
@@ -71,13 +72,15 @@ const AboutDetails = () => {
               </div>
               <div className="flex-grow">
                 <h2 className="text-gray-900 text-lg title-font font-medium mb-3">
-                  The Catalyzer
+                  Apple Watch
                 </h2>
                 <p className="leading-relaxed text-base">
-                  Blue bottle crucifix vinyl post-ironic four dollar toast vegan
-                  taxidermy. Gastropub indxgo juice poutine.
+                  Quality apple watches
                 </p>
-                <a className="mt-3 text-indigo-500 inline-flex items-center">
+                <Link
+                  to={"#"}
+                  className="mt-3 text-indigo-500 inline-flex items-center"
+                >
                   Learn More
                   <svg
                     fill="none"
@@ -90,7 +93,7 @@ const AboutDetails = () => {
                   >
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="flex flex-col mb-10 lg:items-start items-center">
@@ -110,13 +113,15 @@ const AboutDetails = () => {
               </div>
               <div className="flex-grow">
                 <h2 className="text-gray-900 text-lg title-font font-medium mb-3">
-                  Neptune
+                  EarPods
                 </h2>
                 <p className="leading-relaxed text-base">
-                  Blue bottle crucifix vinyl post-ironic four dollar toast vegan
-                  taxidermy. Gastropub indxgo juice poutine.
+                  Apple Earpods with pouch
                 </p>
-                <a className="mt-3 text-indigo-500 inline-flex items-center">
+                <Link
+                  to={"#"}
+                  className="mt-3 text-indigo-500 inline-flex items-center"
+                >
                   Learn More
                   <svg
                     fill="none"
@@ -129,7 +134,7 @@ const AboutDetails = () => {
                   >
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -144,21 +149,12 @@ const AboutDetails = () => {
                   Mobile Phone Repairing
                 </h2>
                 <p className="leading-relaxed text-base">
-                  Blue bottle crucifix vinyl post-ironic four dollar toast vegan
-                  taxidermy. Gastropub indxgo juice poutine. Blue bottle
-                  crucifix vinyl post-ironic four dollar toast vegan taxidermy.
-                  Gastropub indxgo juice poutine. Blue bottle crucifix vinyl
-                  post-ironic four dollar toast vegan taxidermy. Gastropub
-                  indxgo juice poutine. Blue bottle crucifix vinyl post-ironic
-                  four dollar toast vegan taxidermy. Gastropub indxgo juice
-                  poutine. Blue bottle crucifix vinyl post-ironic four dollar
-                  toast vegan taxidermy. Gastropub indxgo juice poutine. Blue
-                  bottle crucifix vinyl post-ironic four dollar toast vegan
-                  taxidermy. Gastropub indxgo juice poutine. Blue bottle
-                  crucifix vinyl post-ironic four dollar toast vegan taxidermy.
-                  Gastropub indxgo juice poutine.
+                  Our engineers have adept knowledge in repairing gadgets
                 </p>
-                <a className="mt-3 text-indigo-500 inline-flex items-center">
+                <Link
+                  to={"#"}
+                  className="mt-3 text-indigo-500 inline-flex items-center"
+                >
                   Learn More
                   <svg
                     fill="none"
@@ -171,7 +167,7 @@ const AboutDetails = () => {
                   >
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
