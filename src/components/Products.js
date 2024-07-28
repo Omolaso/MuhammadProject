@@ -32,7 +32,7 @@ const Products = () => {
                 src={smallProduct1}
               />
               <div className="overlay">
-                <h4 className="text-white  duration-300 absolute bottom-0 left-0 w-full text-center text-2xl font-medium uppercase ">
+                <h4 className="text-white  duration-300 absolute bottom-0 left-0 w-full text-center text-2xl font-medium uppercase">
                   Mobile Phones
                 </h4>
               </div>

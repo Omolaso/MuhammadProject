@@ -8,7 +8,11 @@ function Admin() {
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
 
   const OpenSidebar = () => {
-    setOpenSidebarToggle(!openSidebarToggle);
+    setOpenSidebarToggle(true);
+  };
+
+  const CloseSidebar = () => {
+    setOpenSidebarToggle(false);
   };
 
   return (
@@ -16,7 +20,7 @@ function Admin() {
       <Header OpenSidebar={OpenSidebar} />
       <Sidebar
         openSidebarToggle={openSidebarToggle}
-        OpenSidebar={OpenSidebar}
+        CloseSidebar={CloseSidebar}
       />
       <Outlet />
     </div>

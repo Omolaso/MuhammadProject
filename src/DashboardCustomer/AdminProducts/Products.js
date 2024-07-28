@@ -94,7 +94,7 @@ const AdminProducts = () => {
   }
 
   return (
-    <section className="main-container flex flex-col gap-4 w-full">
+    <section className="main-container flex flex-col gap-4 w-full min-h-screen">
       <div className="flex flex-row items-center justify-between gap-3 flex-wrap">
         <h3>PRODUCTS</h3>
         <div className="flex flex-row items-stretch gap-3 h-8 bg-transparent duration-500 ease-linear">
@@ -134,34 +134,37 @@ const AdminProducts = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {allProducts?.map((product, index) => (
-                  <TableRow
-                    key={index}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {product?.category?.name}
-                    </TableCell>
-                    <TableCell
-                      align="center"
-                      className="whitespace-nowrap max-w-4 text-ellipsis overflow-hidden"
+                {allProducts.length > 0 &&
+                  allProducts?.map((product, index) => (
+                    <TableRow
+                      key={index}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      {product?.name}
-                    </TableCell>
-                    <TableCell align="center">${product?.price}</TableCell>
-                    <TableCell align="center">{product?.site?.name}</TableCell>
-                    <TableCell align="center">
-                      <a
-                        href={product?.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-blue-600 hover:underline"
+                      <TableCell component="th" scope="row">
+                        {product?.category?.name}
+                      </TableCell>
+                      <TableCell
+                        align="center"
+                        className="whitespace-nowrap max-w-4 text-ellipsis overflow-hidden"
                       >
-                        View Here
-                      </a>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                        {product?.name}
+                      </TableCell>
+                      <TableCell align="center">${product?.price}</TableCell>
+                      <TableCell align="center">
+                        {product?.site?.name}
+                      </TableCell>
+                      <TableCell align="center">
+                        <a
+                          href={product?.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-blue-600 hover:underline"
+                        >
+                          View Here
+                        </a>
+                      </TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </TableContainer>

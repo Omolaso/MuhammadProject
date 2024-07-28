@@ -27,11 +27,10 @@ const Blogs = () => {
                 SUBTITLE
               </h3>
               <h2 className="text-lg text-gray-900 font-medium title-font mb-4">
-                Chichen Itza
+                Laptops
               </h2>
               <p className="leading-relaxed text-base">
-                Fingerstache flexitarian street art 8-bit waistcoat. Distillery
-                hexagon disrupt edison bulbche.
+                Portable and Affordable laptops
               </p>
             </div>
           </div>
@@ -46,11 +45,10 @@ const Blogs = () => {
                 SUBTITLE
               </h3>
               <h2 className="text-lg text-gray-900 font-medium title-font mb-4">
-                Colosseum Roma
+                TVs
               </h2>
               <p className="leading-relaxed text-base">
-                Fingerstache flexitarian street art 8-bit waistcoat. Distillery
-                hexagon disrupt edison bulbche.
+                Varieties of smart TVs
               </p>
             </div>
           </div>
@@ -65,11 +63,10 @@ const Blogs = () => {
                 SUBTITLE
               </h3>
               <h2 className="text-lg text-gray-900 font-medium title-font mb-4">
-                Great Pyramid of Giza
+                Smart Phones
               </h2>
               <p className="leading-relaxed text-base">
-                Fingerstache flexitarian street art 8-bit waistcoat. Distillery
-                hexagon disrupt edison bulbche.
+                Phones with extraordinary features
               </p>
             </div>
           </div>
@@ -84,12 +81,9 @@ const Blogs = () => {
                 SUBTITLE
               </h3>
               <h2 className="text-lg text-gray-900 font-medium title-font mb-4">
-                San Francisco
+                MacBooks
               </h2>
-              <p className="leading-relaxed text-base">
-                Fingerstache flexitarian street art 8-bit waistcoat. Distillery
-                hexagon disrupt edison bulbche.
-              </p>
+              <p className="leading-relaxed text-base">Apple laptops</p>
             </div>
           </div>
         </div>

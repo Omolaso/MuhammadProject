@@ -49,12 +49,13 @@ const Header = () => {
             Register
           </Link>
 
-          <button
+          <Link
+            to="/Login"
             className="bg-sky-300 py-1 px-3 focus:outline-none  border-2 border-sky-300 hover:border-yellow-300  rounded text-base
      mt-4 md:mt-0 signBtnHover relative"
           >
             Sign In
-            <div className="signOptions">
+            {/* <div className="signOptions">
               <ul>
                 <li className="py-1">
                   <Link to="/Login">as Vendor</Link>
@@ -66,8 +67,8 @@ const Header = () => {
                   <Link to="/Login">as Admin</Link>
                 </li>
               </ul>
-            </div>
-          </button>
+            </div> */}
+          </Link>
         </div>
       ) : (
         <button

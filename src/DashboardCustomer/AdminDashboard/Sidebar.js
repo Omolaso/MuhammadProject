@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   BsCart3,
@@ -12,13 +12,27 @@ import {
   BsArrowBarLeft,
 } from "react-icons/bs";
 
-function Sidebar({ openSidebarToggle, OpenSidebar }) {
+function Sidebar({ openSidebarToggle, CloseSidebar }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
     sessionStorage.clear();
     navigate("/");
   };
+
+  useEffect(() => {
+    const handleEventListener = () => {
+      window.addEventListener("resize", CloseSidebar);
+      window.addEventListener("scroll", CloseSidebar);
+    };
+
+    handleEventListener();
+
+    return () => {
+      window.removeEventListener("resize", CloseSidebar);
+      window.removeEventListener("scroll", CloseSidebar);
+    };
+  }, [CloseSidebar]);
 
   return (
     <aside
@@ -32,7 +46,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
         <button
           type="button"
           className="icon close_icon block lg:hidden"
-          onClick={() => OpenSidebar()}
+          onClick={() => CloseSidebar()}
         >
           X
         </button>
@@ -40,12 +54,12 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
 
       <ul className="sidebar-list">
         <li className="sidebar-list-item">
-          <Link to="/Admin">
+          <Link to="/Admin" onClick={() => CloseSidebar()}>
             <BsGrid1X2Fill className="icon" /> Dashboard
           </Link>
         </li>
         <li className="sidebar-list-item">
-          <Link to="/Admin/Products">
+          <Link to="/Admin/Products" onClick={() => CloseSidebar()}>
             <BsFillArchiveFill className="icon" /> Products
           </Link>
         </li>
@@ -65,12 +79,12 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
                 </Link>
             </li> */}
         <li className="sidebar-list-item">
-          <Link to="/Admin/Reports">
+          <Link to="/Admin/Reports" onClick={() => CloseSidebar()}>
             <BsMenuButtonWideFill className="icon" /> Reports
           </Link>
         </li>
         <li className="sidebar-list-item">
-          <Link to="/Admin/Users">
+          <Link to="/Admin/Users" onClick={() => CloseSidebar()}>
             <BsPeopleFill className="icon" /> Users
           </Link>
         </li>

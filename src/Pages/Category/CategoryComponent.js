@@ -15,7 +15,7 @@ export const shuffleArray = (array) => {
 
 const CategoryComponent = (props) => {
   const loginID = sessionStorage.getItem("loginID");
-  const shuffledArray = shuffleArray(props?.categoryData);
+  const shuffledProducts = shuffleArray(props?.categoryData);
 
   const handleViewParticularProduct = async (url, id) => {
     const payload = {
@@ -63,7 +63,7 @@ const CategoryComponent = (props) => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center w-full">
-        {shuffledArray?.slice(0, 4)?.map((product, index) => (
+        {shuffledProducts?.slice(0, 4)?.map((product, index) => (
           <ProductCard
             key={index}
             className="flex flex-col items-start justify-center gap-3"

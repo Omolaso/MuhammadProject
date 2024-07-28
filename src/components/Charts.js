@@ -111,7 +111,7 @@ const Charts = () => {
   }
 
   return (
-    <div className="charts">
+    <div className="flex flex-col gap-5 w-full">
       <Fragment>
         {userProductSearchLoading ? (
           <Loader />
@@ -119,7 +119,7 @@ const Charts = () => {
           userProductSearch?.model?.length < 1 ? (
           <NoVisitedProducts />
         ) : (
-          <div className="flex flex-col items-center gap-4 w-full">
+          <div className="charts flex flex-col items-center gap-4 w-full">
             <h2 className="text-center">USER SEARCHED PRODUCTS</h2>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
@@ -152,7 +152,7 @@ const Charts = () => {
           userVisitedProduct?.model?.length < 1 ? (
           <NoVisitedProducts />
         ) : (
-          <div className="flex flex-col items-center gap-4 w-full">
+          <div className="charts flex flex-col items-center gap-4 w-full">
             <h2 className="text-center">USER VISITED PRODUCTS</h2>
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
@@ -190,7 +190,7 @@ const Charts = () => {
           userVisitedProduct?.model?.length < 1 ? (
           <NoVisitedProducts />
         ) : (
-          <div className="flex flex-col items-center gap-4 w-full">
+          <div className="charts flex flex-col items-center gap-4 w-full">
             <h2 className="text-center">USER VISITED SITES</h2>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
